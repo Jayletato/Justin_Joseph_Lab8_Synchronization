@@ -1,18 +1,34 @@
 #include <stdio.h>
 #include <pthread.h>
+#include <unistd.h>
+#include <stdlib.h>
 
-void *increment(int integer);
+#define NUM_THREADS 4
 
-int main()
-{
-    int shared_int = 0;
+void *increment(void *integer) {
+    integer++;
+    }
 
-    pthread_t thread1;
-    pthread_t thread2;
-    pthread_t thread3;
-    pthread_t thread4;
-    pthread_t thread5;
+int main() {
+    int *shared_int = 0;
 
-    pthread_create(&thread1, NULL, increment,)
+    pthread_t threads[NUM_THREADS];
+    int rc;
+
+    for (int i = 0; i < NUM_THREADS; i++) {
+        rc = pthread_create(&threads[i], NULL, &increment, &shared_int);
+        if (rc != 0){
+            printf("error\n");
+            exit(1);
+            }
+        else {
+            printf("Thread created successfully\n");
+
+        }
+        printf("Shared int is: %d\n", shared_int);
+    }
+
+    printf("Final value for shared int is: %d\n", *shared_int);
+    exit(0);
 
 }
