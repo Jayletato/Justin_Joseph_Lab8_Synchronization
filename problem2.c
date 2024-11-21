@@ -22,9 +22,11 @@ void *fibonacciArray(void *arg) {
   pthread_mutex_lock(&lock);
 
   long * fibArray = (long*)malloc(num * sizeof(long));
-  if (fibSequence == NULL) {
+  if (fibArray == NULL) {
     exit(1);
     }
+
+  fibSequence = fibArray;
 
   for (int i = 0; i < num; i++) {
     fibSequence[i] = fibonacci(i);
@@ -49,15 +51,15 @@ int main(int argc, char *argv[]) {
     pthread_create(&threads[i], NULL, fibonacciArray, NULL);
   }
 
+  for (int i = 0; i < NUM_THREADS; i++){
+    pthread_join(threads[i], NULL);
+  }
+
   for (int i = 0; i < num; i++) {
     printf("%ld ", fibSequence[i]);
   }
 
   printf("\n");
-
-  for (int i = 0; i < NUM_THREADS; i++){
-    pthread_join(threads[i], NULL);
-  }
 
   pthread_mutex_destroy(&lock);
   free(fibSequence);
