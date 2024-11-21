@@ -25,10 +25,10 @@ int main() {
             printf("Thread created successfully\n");
 
         }
-        printf("Shared int is: %d\n", shared_int);
+        printf("Shared int is: %d\n", *shared_int);
     }
 
-    printf("Final value for shared int is: %d\n", *shared_int);
+    //printf("Final value for shared int is: %d\n", *shared_int);
     exit(0);
 
 }
