@@ -20,11 +20,9 @@ long *fibonacciArray(long num) {
     exit(1);
     }
 
-  for (int i = 0; i <= num; i++) {
+  for (int i = 0; i < num; i++) {
     fibArray[i] = fibonacci(i);
     }
-
-  long * fibSequence = fibonacciArray(num);
 
   return fibArray;
 }
@@ -37,6 +35,8 @@ int main(int argc, char *argv[]) {
   char *p;
   long num = strtol(argv[1], &p, 10);
   
+  fibSequence = fibonacciArray(num);
+
   for (int i = 0; i < num; i++) {
     printf("%ld ", fibSequence[i]);
     }
